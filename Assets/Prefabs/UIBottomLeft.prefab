@@ -427,6 +427,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _selectedObject: {fileID: 11400000, guid: 9c9cfb97337ea8441ad8045782692e6e, type: 2}
   _icon: {fileID: 924487431817732144}
+  _health: {fileID: 2598951426495314655}
   _healthText: {fileID: 9170861536232269769}
 --- !u!1 &7308963013237033544
 GameObject:

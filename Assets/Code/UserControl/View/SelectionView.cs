@@ -6,8 +6,8 @@ namespace Strategy.UserControl.View
 {
     public sealed class SelectionView : MonoBehaviour
     {
-        [SerializeField] Renderer[] _renderers;
-        [SerializeField] Material _material;
+        [SerializeField] private Renderer[] _renderers;
+        [SerializeField] private Material _material;
 
         public void SetSelected(bool value)
         {
@@ -18,7 +18,7 @@ namespace Strategy.UserControl.View
                 if(value == true)
                     materials.Add(_material);
                 else
-                    materials.Remove(_material);
+                    materials.RemoveAt(materials.Count - 1);
                 
                 renderer.materials = materials.ToArray();
             }
