@@ -301,7 +301,7 @@ MonoBehaviour:
   - {fileID: 7184644602358550206}
   - {fileID: 7184644602358550200}
   - {fileID: 7184644602358550202}
-  _material: {fileID: 0}
+  _material: {fileID: 2100000, guid: ab54329a37729fb4eacfb18683fc738d, type: 2}
 --- !u!1 &7184644602360549502
 GameObject:
   m_ObjectHideFlags: 0
