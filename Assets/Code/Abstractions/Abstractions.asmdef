@@ -1,7 +1,9 @@
 {
     "name": "Abstractions",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "Utils"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
