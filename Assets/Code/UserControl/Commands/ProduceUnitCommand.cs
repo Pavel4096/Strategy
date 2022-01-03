@@ -8,6 +8,6 @@ namespace Strategy.UserControl.Commands
     {
         public GameObject UnitPrefab => _unitPrefab;
 
-        [InjectAsset("Unit0")] private GameObject _unitPrefab;
+        [InjectAsset(CommandConstants.Unit0)] private GameObject _unitPrefab;
     }
 }
