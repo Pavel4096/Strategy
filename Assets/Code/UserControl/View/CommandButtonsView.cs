@@ -47,6 +47,21 @@ namespace Strategy.UserControl.View
             }
         }
 
+        public void BlockInteraction(ICommandExecutor executor)
+        {
+            UnblockAllInteractions();
+            GetButtonObjectByType(executor.GetType()).GetComponent<Selectable>().interactable = false;
+        }
+
+        public void UnblockAllInteractions()
+        {
+            _attackButton.GetComponent<Selectable>().interactable = true;
+            _produceUnitButton.GetComponent<Selectable>().interactable = true;
+            _stopButton.GetComponent<Selectable>().interactable = true;
+            _patrolButton.GetComponent<Selectable>().interactable = true;
+            _moveButton.GetComponent<Selectable>().interactable = true;
+        }
+
         public void Clear()
         {
             foreach(var currentButton in _buttonsByExecutorType)
@@ -55,6 +70,17 @@ namespace Strategy.UserControl.View
                 Button button = currentButton.Value.GetComponent<Button>();
                 button.onClick.RemoveAllListeners();
             }
+        }
+
+        private GameObject GetButtonObjectByType(Type executorType)
+        {
+            foreach(KeyValuePair<Type, GameObject> currentButton in _buttonsByExecutorType)
+            {
+                if(currentButton.Key.IsAssignableFrom(executorType))
+                    return currentButton.Value;
+            }
+
+            return null;
         }
     }
 }

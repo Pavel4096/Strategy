@@ -12,12 +12,12 @@ namespace Strategy.UserControl.Presenter
 
         private void Start()
         {
-            _selectedObject.SelectionChanged += UpdateSelection;
+            _selectedObject.ValueChanged += UpdateSelection;
         }
 
         private void OnDestroy()
         {
-            _selectedObject.SelectionChanged -= UpdateSelection;
+            _selectedObject.ValueChanged -= UpdateSelection;
         }
 
         private void UpdateSelection(ISelectable newSelectable)
