@@ -7,8 +7,8 @@ namespace Strategy.UserControl.Presenter
 {
     public sealed class SelectionPresenter : MonoBehaviour
     {
-        [SerializeField] SelectableValue _selectedObject;
-        [SerializeField] ISelectable _currentSelection;
+        [SerializeField] private SelectableValue _selectedObject;
+        private ISelectable _currentSelection;
 
         private void Start()
         {
@@ -22,17 +22,17 @@ namespace Strategy.UserControl.Presenter
 
         private void UpdateSelection(ISelectable newSelectable)
         {
-            if(_currentSelection != null)
+            if(_currentSelection is Component currentSelection)
             {
-                SelectionView currentSelectionView = (_currentSelection as Component).GetComponentInParent<SelectionView>();
+                SelectionView currentSelectionView = currentSelection.GetComponentInParent<SelectionView>();
                 currentSelectionView.SetSelected(false);
             }
 
             _currentSelection = newSelectable;
 
-            if(newSelectable != null)
+            if(newSelectable is Component newSelection)
             {
-                SelectionView newSelectionView = (newSelectable as Component).GetComponentInParent<SelectionView>();
+                SelectionView newSelectionView = newSelection.GetComponentInParent<SelectionView>();
                 newSelectionView.SetSelected(true);
             }
         }

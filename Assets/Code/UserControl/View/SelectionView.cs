@@ -11,16 +11,16 @@ namespace Strategy.UserControl.View
 
         public void SetSelected(bool value)
         {
-            foreach(var renderer in _renderers)
+            foreach(var currentRenderer in _renderers)
             {
-                var materials = renderer.materials.ToList();
+                var materials = currentRenderer.sharedMaterials.ToList();
 
-                if(value == true)
+                if(value)
                     materials.Add(_material);
                 else
-                    materials.RemoveAt(materials.Count - 1);
+                    materials.Remove(_material);
                 
-                renderer.materials = materials.ToArray();
+                currentRenderer.sharedMaterials = materials.ToArray();
             }
         }
     }
