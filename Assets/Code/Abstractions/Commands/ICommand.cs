@@ -1,4 +1,4 @@
-namespace Strategy.Abstractions
+namespace Strategy.Abstractions.Commands
 {
     public interface ICommand
     {}

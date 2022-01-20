@@ -5,6 +5,7 @@ using Strategy.UserControl.View;
 using Strategy.UserControl.Model;
 using Strategy.UserControl.Commands;
 using System.Collections.Generic;
+using Zenject;
 using UnityEngine;
 
 namespace Strategy.UserControl.Presenter
@@ -14,20 +15,28 @@ namespace Strategy.UserControl.Presenter
         [SerializeField] private SelectableValue _selectedObject;
         [SerializeField] private CommandButtonsView _commandButtonsView;
         [SerializeField] private AssetsContext _assetsContext;
+        [Inject] private CommandButtonsModel _model;
+
         private ISelectable _currentSelectable;
 
         private void Start()
         {
+            _commandButtonsView.CommandSelected += _model.CommandButtonClicked;
+            _model.CommandAccepted += _commandButtonsView.BlockInteraction;
+            _model.CommandSent += _commandButtonsView.UnblockAllInteractions;
+            _model.CommandCanceled += _commandButtonsView.UnblockAllInteractions;
             _commandButtonsView.Clear();
-            _selectedObject.SelectionChanged += SelectionChanged;
+            _selectedObject.ValueChanged += SelectionChanged;
             SelectionChanged(_selectedObject.Value);
-            _commandButtonsView.CommandSelected += CommandSelected;
         }
 
         private void OnDestroy()
         {
-            _selectedObject.SelectionChanged -= SelectionChanged;
-            _commandButtonsView.CommandSelected -= CommandSelected;
+            _commandButtonsView.CommandSelected -= _model.CommandButtonClicked;
+            _model.CommandAccepted -= _commandButtonsView.BlockInteraction;
+            _model.CommandSent -= _commandButtonsView.UnblockAllInteractions;
+            _model.CommandCanceled -= _commandButtonsView.UnblockAllInteractions;
+            _selectedObject.ValueChanged -= SelectionChanged;
         }
 
         private void SelectionChanged(ISelectable selectable)
@@ -35,8 +44,12 @@ namespace Strategy.UserControl.Presenter
             if(selectable == _currentSelectable)
                 return;
             
+            if(_currentSelectable != null)
+                _model.SelectionChanged();
+            
             _commandButtonsView.Clear();
             _currentSelectable = selectable;
+
 
             if(selectable != null)
             {
@@ -46,7 +59,7 @@ namespace Strategy.UserControl.Presenter
             }
         }
 
-        private void CommandSelected(ICommandExecutor commandExecutor)
+        /*private void CommandSelected(ICommandExecutor commandExecutor)
         {
             switch(commandExecutor)
             {
@@ -69,6 +82,6 @@ namespace Strategy.UserControl.Presenter
                     Debug.Log($"{commandExecutor.GetType()} - command not found");
                     break;
             }
-        }
+        }*/
     }
 }

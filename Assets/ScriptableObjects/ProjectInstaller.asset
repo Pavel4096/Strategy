@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d914bbc5c3005ea41803f31df1080b36, type: 3}
+  m_Name: ProjectInstaller
+  m_EditorClassIdentifier: 
+  _assetsContext: {fileID: 11400000, guid: 68a3348dded59384ca8b45d957b3e04c, type: 2}
+  _selectableValue: {fileID: 11400000, guid: 9c9cfb97337ea8441ad8045782692e6e, type: 2}
+  _vector3Value: {fileID: 11400000, guid: 1d7ac77574cdfa0489f23d0c22f760ad, type: 2}
+  _attackableValue: {fileID: 11400000, guid: 25ba53f1566a0ea488461ca1d4d8c605, type: 2}

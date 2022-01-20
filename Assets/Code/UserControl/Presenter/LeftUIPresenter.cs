@@ -15,13 +15,13 @@ namespace Stragety.UserControl.Presenter
         
         private void Start()
         {
-            _selectedObject.SelectionChanged += UpdateUI;
+            _selectedObject.ValueChanged += UpdateUI;
             UpdateUI(_selectedObject.Value);
         }
 
         private void OnDestroy()
         {
-            _selectedObject.SelectionChanged -= UpdateUI;
+            _selectedObject.ValueChanged -= UpdateUI;
         }
 
         private void UpdateUI(ISelectable currentSelectable)
