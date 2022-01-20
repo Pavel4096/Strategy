@@ -4,6 +4,7 @@ using Strategy.UserControl.Commands;
 using Strategy.UserControl.Utils.AssetsInjector;
 using Zenject;
 using System;
+using System.Threading;
 using UnityEngine;
 
 namespace Strategy.UserControl.Model
@@ -12,10 +13,15 @@ namespace Strategy.UserControl.Model
     {
         [Inject] private AssetsContext _assetsContext;
         private Action<IMoveCommand> _commandCallback;
+        private bool doNotNullCallback;
 
         [Inject] private void Init(Vector3Value vector3Value) => vector3Value.ValueChanged += ClickedGround;
 
-        public override void SpecificCommandCreation(Action<IMoveCommand> callback) => _commandCallback = callback;
+        public override void SpecificCommandCreation(Action<IMoveCommand> callback)
+        {
+            _commandCallback = callback;
+            doNotNullCallback = true;
+        }
 
         public override void ProcessCancel()
         {
@@ -25,8 +31,10 @@ namespace Strategy.UserControl.Model
 
         private void ClickedGround(Vector3 position)
         {
+            doNotNullCallback = false;
             _commandCallback?.Invoke(_assetsContext.InjectAsset(new MoveCommand(position)));
-            _commandCallback = null;
+            if(!doNotNullCallback)
+                _commandCallback = null;
         }
     }
 }

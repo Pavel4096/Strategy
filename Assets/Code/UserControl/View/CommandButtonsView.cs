@@ -18,6 +18,8 @@ namespace Strategy.UserControl.View
 
         private Dictionary<Type, GameObject> _buttonsByExecutorType;
 
+        private ICommandExecutor _defaultCommandExecutor;
+
         private void Awake()
         {
             _buttonsByExecutorType = new Dictionary<Type, GameObject>();
@@ -41,9 +43,17 @@ namespace Strategy.UserControl.View
                         break;
                     }
                 }
-                currentButtonObject.SetActive(true);
-                Button button = currentButtonObject.GetComponent<Button>();
-                button.onClick.AddListener(() => CommandSelected?.Invoke(currentExecutor));
+                if(currentExecutor is CommandExecutorBase<IMoveCommand>)
+                {
+                    _defaultCommandExecutor = currentExecutor;
+                    EnableDefaultCommand();
+                }
+                else
+                {
+                    currentButtonObject.SetActive(true);
+                    Button button = currentButtonObject.GetComponent<Button>();
+                    button.onClick.AddListener(() => CommandSelected?.Invoke(currentExecutor));
+                }
             }
         }
 
@@ -62,6 +72,13 @@ namespace Strategy.UserControl.View
             _moveButton.GetComponent<Selectable>().interactable = true;
         }
 
+        public void EnableDefaultCommand()
+        {
+            Debug.Log("Enabling default command");
+            if(_defaultCommandExecutor != null)
+                CommandSelected?.Invoke(_defaultCommandExecutor);
+        }
+
         public void Clear()
         {
             foreach(var currentButton in _buttonsByExecutorType)
@@ -70,6 +87,7 @@ namespace Strategy.UserControl.View
                 Button button = currentButton.Value.GetComponent<Button>();
                 button.onClick.RemoveAllListeners();
             }
+            _defaultCommandExecutor = null;
         }
 
         private GameObject GetButtonObjectByType(Type executorType)

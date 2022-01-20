@@ -24,6 +24,7 @@ namespace Strategy.UserControl.Presenter
             _commandButtonsView.CommandSelected += _model.CommandButtonClicked;
             _model.CommandAccepted += _commandButtonsView.BlockInteraction;
             _model.CommandSent += _commandButtonsView.UnblockAllInteractions;
+            _model.CommandSent += _commandButtonsView.EnableDefaultCommand;
             _model.CommandCanceled += _commandButtonsView.UnblockAllInteractions;
             _commandButtonsView.Clear();
             _selectedObject.ValueChanged += SelectionChanged;
@@ -35,6 +36,7 @@ namespace Strategy.UserControl.Presenter
             _commandButtonsView.CommandSelected -= _model.CommandButtonClicked;
             _model.CommandAccepted -= _commandButtonsView.BlockInteraction;
             _model.CommandSent -= _commandButtonsView.UnblockAllInteractions;
+            _model.CommandSent -= _commandButtonsView.EnableDefaultCommand;
             _model.CommandCanceled -= _commandButtonsView.UnblockAllInteractions;
             _selectedObject.ValueChanged -= SelectionChanged;
         }
@@ -58,30 +60,5 @@ namespace Strategy.UserControl.Presenter
                 _commandButtonsView.MakeLayout(commandExecutors);
             }
         }
-
-        /*private void CommandSelected(ICommandExecutor commandExecutor)
-        {
-            switch(commandExecutor)
-            {
-                case CommandExecutorBase<IProduceUnitCommand> unitProducer:
-                    unitProducer.ExecuteSpecificCommand(_assetsContext.InjectAsset(new ProduceUnitCommandDerived()));
-                    break;
-                case CommandExecutorBase<IAttackCommand> attacker:
-                    attacker.ExecuteSpecificCommand(_assetsContext.InjectAsset(new AttackCommand()));
-                    break;
-                case CommandExecutorBase<IPatrolCommand> patroller:
-                    patroller.ExecuteSpecificCommand(_assetsContext.InjectAsset(new PatrolCommand()));
-                    break;
-                case CommandExecutorBase<IStopCommand> stopper:
-                    stopper.ExecuteSpecificCommand(_assetsContext.InjectAsset(new StopCommand()));
-                    break;
-                case CommandExecutorBase<IMoveCommand> mover:
-                    mover.ExecuteSpecificCommand(_assetsContext.InjectAsset(new MoveCommand()));
-                    break;
-                default:
-                    Debug.Log($"{commandExecutor.GetType()} - command not found");
-                    break;
-            }
-        }*/
     }
 }
