@@ -2,7 +2,8 @@
     "name": "Core",
     "rootNamespace": "",
     "references": [
-        "Abstractions"
+        "Abstractions",
+        "Utils"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

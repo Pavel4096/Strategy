@@ -74,7 +74,6 @@ namespace Strategy.UserControl.View
 
         public void EnableDefaultCommand()
         {
-            Debug.Log("Enabling default command");
             if(_defaultCommandExecutor != null)
                 CommandSelected?.Invoke(_defaultCommandExecutor);
         }

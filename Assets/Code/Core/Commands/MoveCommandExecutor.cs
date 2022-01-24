@@ -10,6 +10,7 @@ namespace Strategy.Core.Commands
 {
     public sealed class MoveCommandExecutor : CommandExecutorBase<IMoveCommand>
     {
+        [SerializeField] private UnitStopper _unitStopper;
         private bool _isInProgress;
         public override async void ExecuteSpecificCommand(IMoveCommand command)
         {
@@ -22,7 +23,7 @@ namespace Strategy.Core.Commands
             {
                 _isInProgress = true;
                 GetComponent<Animator>()?.SetTrigger("Walk");
-                await WaitForTargetPoint(meshAgent);
+                await _unitStopper;
                 GetComponent<Animator>()?.SetTrigger("Idle");
                 _isInProgress = false;
                 meshAgent.enabled = false;

@@ -2746,6 +2746,7 @@ GameObject:
   - component: {fileID: 7917322372344599875}
   - component: {fileID: 7983447819516641213}
   - component: {fileID: 8592863297222133837}
+  - component: {fileID: 1207407987282124406}
   - component: {fileID: 6926546609511947055}
   - component: {fileID: 8096187299452323431}
   m_Layer: 0
@@ -2868,6 +2869,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15496aefd7e440742ae8a7972b0b763d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unitStopper: {fileID: 1207407987282124406}
+--- !u!114 &1207407987282124406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5505366496807801696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f5193bc7cfd20a4dbc25413daf78d4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!195 &6926546609511947055
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2897,7 +2911,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5505366496807801696}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.25, y: 0.25, z: 0.25}
