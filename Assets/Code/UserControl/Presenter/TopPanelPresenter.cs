@@ -23,6 +23,9 @@ namespace Strategy.UserControl.Presenter
             });
 
             _menuButton.OnClickAsObservable().Subscribe((_) => _menuGameObject.SetActive(true));
+
+            _menuGameObject.ObserveEveryValueChanged(v => v.activeSelf).
+                Subscribe((value) => Time.timeScale = value ? 0.0f : 1.0f);
         }
     }
 }
