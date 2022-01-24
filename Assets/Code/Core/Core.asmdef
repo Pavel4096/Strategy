@@ -3,7 +3,9 @@
     "rootNamespace": "",
     "references": [
         "Abstractions",
-        "Utils"
+        "Utils",
+        "UniRx",
+        "Zenject"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
