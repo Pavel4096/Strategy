@@ -6,7 +6,8 @@
         "Utils",
         "UserControl",
         "Zenject",
-        "Commands"
+        "Commands",
+        "UniRx"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
