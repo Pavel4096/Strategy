@@ -1,11 +1,14 @@
 using Strategy.Abstractions;
 using Strategy.Abstractions.Commands;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Strategy.Core
 {
     public sealed class MainBuilding : CommandExecutorBase<IProduceUnitCommand>, ISelectable
     {
+        private const int _UNIT_PRODUCTION_DELAY = 1000;
+
         public float MaxHealth => _maxHealth;
         public float Health => _health;
         public Sprite Icon => _icon;
@@ -15,15 +18,17 @@ namespace Strategy.Core
         [SerializeField] private Sprite _icon;
         private float _health;
 
+        private IUnitProducer _unitProducer;
+
         public override void ExecuteSpecificCommand(IProduceUnitCommand command)
         {
-            Vector3 position = new Vector3(Random.Range(-10.0f, 10.0f), 0.0f, Random.Range(-10.0f, 10.0f));
-            Instantiate(command.UnitPrefab, position, Quaternion.identity, _unitParent);
+            _unitProducer.ProduceUnit(command.UnitPrefab);
         }
 
         private void Awake()
         {
             _health = _maxHealth;
+            _unitProducer = new UnitProducer(_unitParent, _UNIT_PRODUCTION_DELAY);
         }
     }
 }

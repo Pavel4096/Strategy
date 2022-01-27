@@ -1,5 +1,6 @@
 using Strategy.Abstractions.Commands;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Strategy.Core.Commands
 {
@@ -7,7 +8,11 @@ namespace Strategy.Core.Commands
     {
         public override void ExecuteSpecificCommand(IStopCommand command)
         {
-            Debug.Log("Stop");
+            NavMeshAgent meshAgent = GetComponent<NavMeshAgent>();
+            
+            meshAgent.SetDestination(GetComponent<Transform>().position);
+            meshAgent.enabled = false;
+            GetComponent<Animator>().SetTrigger("Idle");
         }
     }
 }

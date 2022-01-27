@@ -1,3 +1,5 @@
+using Strategy.Abstractions;
+using Strategy.UserControl.Utils;
 using Strategy.UserControl.Utils.AssetsInjector;
 using Zenject;
 using UnityEngine;
@@ -18,6 +20,10 @@ namespace Strategy.UserControl.Model
             Container.Bind<SelectableValue>().FromInstance(_selectableValue);
             Container.Bind<Vector3Value>().FromInstance(_vector3Value);
             Container.Bind<AttackableValue>().FromInstance(_attackableValue);
+
+            Container.Bind<IAwaitable<ISelectable>>().FromInstance(_selectableValue);
+            Container.Bind<IAwaitable<Vector3>>().FromInstance(_vector3Value);
+            Container.Bind<IAwaitable<IAttackable>>().FromInstance(_attackableValue);
         }
     }
 }

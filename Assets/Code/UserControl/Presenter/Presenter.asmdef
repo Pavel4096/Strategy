@@ -7,7 +7,9 @@
         "Abstractions",
         "Unity.TextMeshPro",
         "Utils",
-        "UserControl"
+        "UserControl",
+        "Commands",
+        "UniRx"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -3,6 +3,7 @@ using Strategy.UserControl.Model;
 using System;
 using System.Collections.Generic;
 using Zenject;
+using UniRx;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -24,6 +25,22 @@ namespace Strategy.UserControl.Presenter
         private const int _defaultArraySize = 5;
         private const string _groundLayerName = "Ground";
 
+        [Inject]
+        private void Init()
+        {
+            Observable.EveryUpdate().
+                Where((_) => Input.GetMouseButtonUp(_leftMouseButton) && !_eventSystem.IsPointerOverGameObject()).
+                Subscribe((_) => {
+                    CheckLeftMouseButton();
+                });
+
+            Observable.EveryUpdate().
+                Where((_) => Input.GetMouseButtonUp(_rightMouseButton) && !_eventSystem.IsPointerOverGameObject()).
+                Subscribe((_) => {
+                    CheckRightMouseButton();
+                });
+        }
+
         private void Awake()
         {
             _camera = Camera.main;
@@ -31,44 +48,38 @@ namespace Strategy.UserControl.Presenter
             _groundLayer = LayerMask.NameToLayer(_groundLayerName);
         }
 
-        private void Update()
+        private void CheckLeftMouseButton()
         {
-            if(_eventSystem.IsPointerOverGameObject())
-                return;
-        
-            if(Input.GetMouseButtonUp(_leftMouseButton))
-            {
-            
-                int count = GetHitsCount();
-                Array.Sort(_hits, 0, count, new CompareDistances());
+            int count = GetHitsCount();
+            Array.Sort(_hits, 0, count, new CompareDistances());
 
-                bool selectionFound = false;
-                for(var i = 0; i < count; i++)
-                {
-                    ISelectable currentSelectable = _hits[i].collider.GetComponentInParent<ISelectable>();
-                    if(currentSelectable == null)
-                        continue;
+            bool selectionFound = false;
+            for(var i = 0; i < count; i++)
+            {
+                ISelectable currentSelectable = _hits[i].collider.GetComponentInParent<ISelectable>();
+                if(currentSelectable == null)
+                    continue;
                 
-                    _selectedObject.ChangeValue(currentSelectable);
-                    selectionFound = true;
-                    break;   
-                }
-
-                if(!selectionFound)
-                    _selectedObject.ChangeValue(null);
+                _selectedObject.ChangeValue(currentSelectable);
+                selectionFound = true;
+                break;   
             }
-            else if(Input.GetMouseButtonUp(_rightMouseButton))
+
+            if(!selectionFound)
+                _selectedObject.ChangeValue(null);
+        }
+
+        private void CheckRightMouseButton()
+        {
+            if(Physics.Raycast(_camera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
             {
-                if(Physics.Raycast(_camera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
+                if(hit.transform.gameObject.layer == _groundLayer)
+                    _vector3Value.ChangeValue(hit.point);
+                else
                 {
-                    if(hit.transform.gameObject.layer == _groundLayer)
-                        _vector3Value.ChangeValue(hit.point);
-                    else
-                    {
-                        IAttackable attackable = hit.transform.GetComponentInParent<IAttackable>();
-                        if(attackable != null)
-                            _attackableValue.ChangeValue(attackable);
-                    }
+                    IAttackable attackable = hit.transform.GetComponentInParent<IAttackable>();
+                    if(attackable != null)
+                        _attackableValue.ChangeValue(attackable);
                 }
             }
         }

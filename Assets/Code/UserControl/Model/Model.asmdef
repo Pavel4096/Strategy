@@ -5,7 +5,8 @@
         "Abstractions",
         "Utils",
         "UserControl",
-        "Zenject"
+        "Zenject",
+        "Commands"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
