@@ -1945,6 +1945,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2056101221}
     - target: {fileID: 4419142055836359797, guid: adf0714776b93fa4c864b31c6cc84e5e, type: 3}
+      propertyPath: _point
+      value: 
+      objectReference: {fileID: 2135131857}
+    - target: {fileID: 4419142055836359797, guid: adf0714776b93fa4c864b31c6cc84e5e, type: 3}
       propertyPath: _unitParent
       value: 
       objectReference: {fileID: 2056101221}
@@ -3124,6 +3128,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2114076916}
   m_CullTransparentMesh: 1
+--- !u!1 &2135131856
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2135131857}
+  m_Layer: 0
+  m_Name: Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2135131857
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135131856}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.03, y: 0, z: 4.34}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5974117280577991474
 PrefabInstance:
   m_ObjectHideFlags: 0

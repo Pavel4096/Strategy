@@ -12,6 +12,7 @@ namespace Strategy.Core
         public IReadOnlyReactiveCollection<IUnitProductionTask> Queue => (IReadOnlyReactiveCollection<IUnitProductionTask>) _queue;
 
         [SerializeField] private Transform _unitParent;
+        [SerializeField] private Transform _point;
         private ReactiveCollection<IUnitProductionTask> _queue = new ReactiveCollection<IUnitProductionTask>();
 
         public void Cancel(int index) => RemoveItemAtIndex(index);
@@ -41,8 +42,12 @@ namespace Strategy.Core
 
         private void ProduceUnit(UnitProductionTask unitProductionTask)
         {
-            var position = new Vector3(Random.Range(-10.0f, 10.0f), 0.0f, Random.Range(-10.0f, 10.0f));
-            Object.Instantiate(unitProductionTask.UnitPrefab, position, Quaternion.identity, _unitParent);
+            //var position = new Vector3(Random.Range(-10.0f, 10.0f), 0.0f, Random.Range(-10.0f, 10.0f));
+            var position = gameObject.transform.position;
+            var newUnit = Object.Instantiate(unitProductionTask.UnitPrefab, position, Quaternion.identity, _unitParent);
+
+            CommandExecutorBase<IMoveCommand> executor = newUnit.GetComponentInChildren<CommandExecutorBase<IMoveCommand>>();
+            executor.ExecuteCommand(new MoveCommand(_point.position));
         }
 
         private void RemoveItemAtIndex(int index)
@@ -51,6 +56,16 @@ namespace Strategy.Core
                 _queue[i] = _queue[i + 1];
             
             _queue.RemoveAt(_queue.Count - 1);
+        }
+
+        private sealed class MoveCommand : IMoveCommand
+        {
+            public Vector3 Position { get; }
+
+            public MoveCommand(Vector3 position)
+            {
+                Position = position;
+            }
         }
     }
 }

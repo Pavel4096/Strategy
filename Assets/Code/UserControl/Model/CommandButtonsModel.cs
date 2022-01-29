@@ -1,3 +1,4 @@
+using Strategy.Abstractions;
 using Strategy.Abstractions.Commands;
 using Strategy.UserControl.Commands;
 using Strategy.UserControl.Utils;
@@ -12,6 +13,8 @@ namespace Strategy.UserControl.Model
         public event Action<ICommandExecutor> CommandAccepted;
         public event Action CommandSent;
         public event Action CommandCanceled;
+
+        public ICommandListExecutor CommandListExecutor;
 
         [Inject] private CommandCreatorBase<IStopCommand> _stopCommand;
         [Inject] private CommandCreatorBase<IProduceUnitCommand> _produceUnitCommand;
@@ -44,7 +47,10 @@ namespace Strategy.UserControl.Model
 
         private void ProcessCommandExecution(ICommandExecutor executor, object command)
         {
-            executor.ExecuteCommand(command);
+            if(CommandListExecutor != null)
+                CommandListExecutor.AddCommand(executor, command);
+            else
+                executor.ExecuteCommand(command);
             _isCommandPending = false;
             CommandSent?.Invoke();
         }
