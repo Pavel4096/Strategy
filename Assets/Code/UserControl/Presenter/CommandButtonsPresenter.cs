@@ -55,9 +55,13 @@ namespace Strategy.UserControl.Presenter
 
             if(selectable != null)
             {
-                var commandExecutors = new List<ICommandExecutor>();
-                commandExecutors.AddRange((selectable as Component).GetComponentsInParent<ICommandExecutor>());
-                _commandButtonsView.MakeLayout(commandExecutors);
+                if(selectable is Component selectableComponent)
+                {
+                    _model.CommandListExecutor = selectableComponent.GetComponent<ICommandListExecutor>();
+                    var commandExecutors = new List<ICommandExecutor>();
+                    commandExecutors.AddRange(selectableComponent.GetComponentsInParent<ICommandExecutor>());
+                    _commandButtonsView.MakeLayout(commandExecutors);
+                }
             }
         }
     }

@@ -14,6 +14,9 @@ namespace Strategy.UserControl.Model
             Container.Bind<CommandCreatorBase<IPatrolCommand>>().To<PatrolCommandCreator>().AsTransient();
             Container.Bind<CommandCreatorBase<IMoveCommand>>().To<MoveCommandCreator>().AsTransient();
             Container.Bind<CommandButtonsModel>().AsSingle();
+            Container.Bind<string>().WithId("Chomper").FromInstance("Some name");
+            Container.Bind<float>().WithId("Chomper").FromInstance(2.5f);
+            Container.Bind<UICenterModel>().AsSingle();
         }
     }
 }

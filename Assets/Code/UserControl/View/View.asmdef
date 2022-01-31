@@ -2,7 +2,10 @@
     "name": "View",
     "rootNamespace": "",
     "references": [
-        "Abstractions"
+        "Abstractions",
+        "UniRx",
+        "Unity.TextMeshPro",
+        "Zenject"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

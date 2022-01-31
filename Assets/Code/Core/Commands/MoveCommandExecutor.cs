@@ -3,6 +3,7 @@ using Strategy.Abstractions;
 using System.Threading;
 using System.Threading.Tasks;
 using Zenject;
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,6 +11,8 @@ namespace Strategy.Core.Commands
 {
     public sealed class MoveCommandExecutor : CommandExecutorBase<IMoveCommand>
     {
+        public override event Action Completed;
+
         [SerializeField] private UnitStopper _unitStopper;
         private bool _isInProgress;
         public override async void ExecuteSpecificCommand(IMoveCommand command)
@@ -27,6 +30,7 @@ namespace Strategy.Core.Commands
                 GetComponent<Animator>()?.SetTrigger("Idle");
                 _isInProgress = false;
                 meshAgent.enabled = false;
+                Completed?.Invoke();
             }
         }
 

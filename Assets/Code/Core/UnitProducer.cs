@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Strategy.Core
 {
-    internal sealed class UnitProducer : IUnitProducer
+    internal sealed class UnitProducer
     {
         private Queue<GameObject> _unitsToProduce = new Queue<GameObject>();
         private Transform _parent;

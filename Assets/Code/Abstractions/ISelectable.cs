@@ -2,10 +2,9 @@ using UnityEngine;
 
 namespace Strategy.Abstractions
 {
-    public interface ISelectable
+    public interface ISelectable : IContainsIcon
     {
         float MaxHealth { get; }
         float Health { get; }
-        Sprite Icon { get; }
     }
 }
