@@ -1,5 +1,6 @@
 using Strategy.Abstractions;
 using Strategy.Abstractions.Commands;
+using Strategy.Core.Commands;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,8 +26,16 @@ namespace Strategy.Core
 
         public void AddCommand(ICommandExecutor executor, object command)
         {
-            var currentItem = new CommandItem(executor, command);
-            _commands.Enqueue(currentItem);
+            if(executor is StopCommandExecutor)
+            {
+                executor.ExecuteCommand(command);
+                _commands.Clear();
+            }
+            else
+            {
+                var currentItem = new CommandItem(executor, command);
+                _commands.Enqueue(currentItem);
+            }
         }
 
         private void CommandCompleted()

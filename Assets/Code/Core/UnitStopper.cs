@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 namespace Strategy.Core
 {
-    public sealed class UnitStopper : MonoBehaviour, ICompletableValue<AwaiterExtensions.Void>, IAwaitable<AwaiterExtensions.Void>
+    public sealed class UnitStopper : MonoBehaviour, IAwaitable<AwaiterExtensions.Void>, ICompletableValue<AwaiterExtensions.Void>
     {
         public IAwaiter<AwaiterExtensions.Void> GetAwaiter()
         {

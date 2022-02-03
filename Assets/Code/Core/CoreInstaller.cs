@@ -8,6 +8,7 @@ namespace Strategy.Core
         public override void InstallBindings()
         {
             Container.Bind<ITimeModel>().To<TimeModel>().AsSingle();
+            Container.Bind<RemainingUnits>().AsSingle();
         }
     }
 }
