@@ -219,6 +219,8 @@ GameObject:
   - component: {fileID: 1833900941949838412}
   - component: {fileID: 4419142055836359797}
   - component: {fileID: 6379880565335213171}
+  - component: {fileID: 643809013215030668}
+  - component: {fileID: 706247727657475047}
   m_Layer: 0
   m_Name: Building0
   m_TagString: Untagged
@@ -298,6 +300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitParent: {fileID: 0}
+  _point: {fileID: 0}
 --- !u!114 &6379880565335213171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,6 +318,31 @@ MonoBehaviour:
   - {fileID: 7184644602358550200}
   - {fileID: 7184644602358550202}
   _material: {fileID: 2100000, guid: ab54329a37729fb4eacfb18683fc738d, type: 2}
+--- !u!114 &643809013215030668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7184644602360549500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d1de0204cf1011468f636575c079b18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _teamID: 0
+--- !u!114 &706247727657475047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7184644602360549500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd27a0f81caec8c43ba5ee5e2a0c445a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7184644602360549502
 GameObject:
   m_ObjectHideFlags: 0

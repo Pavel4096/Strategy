@@ -1,5 +1,6 @@
 using Strategy.Abstractions.Commands;
 using Strategy.Abstractions;
+using Strategy.UserControl.Utils;
 using System.Threading;
 using System.Threading.Tasks;
 using Zenject;
@@ -14,7 +15,14 @@ namespace Strategy.Core.Commands
         public override event Action Completed;
 
         [SerializeField] private UnitStopper _unitStopper;
+        private StopCommandExecutor _stopCommandExecutor;
         private bool _isInProgress;
+
+        private void Awake()
+        {
+            _stopCommandExecutor = GetComponent<StopCommandExecutor>();
+        }
+
         public override async void ExecuteSpecificCommand(IMoveCommand command)
         {
             NavMeshAgent meshAgent = GetComponent<NavMeshAgent>();
@@ -26,7 +34,11 @@ namespace Strategy.Core.Commands
             {
                 _isInProgress = true;
                 GetComponent<Animator>()?.SetTrigger("Walk");
-                await _unitStopper;
+                try
+                {
+                    await _unitStopper.WithCancellation(_stopCommandExecutor.GetCancellationToken());
+                }
+                catch {}
                 GetComponent<Animator>()?.SetTrigger("Idle");
                 _isInProgress = false;
                 meshAgent.enabled = false;

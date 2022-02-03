@@ -13,6 +13,7 @@ namespace Strategy.Core
 
         [SerializeField] private Transform _unitParent;
         [SerializeField] private Transform _point;
+        [Inject] private RemainingUnits _remainingUnits;
         private ReactiveCollection<IUnitProductionTask> _queue = new ReactiveCollection<IUnitProductionTask>();
 
         public void Cancel(int index) => RemoveItemAtIndex(index);
@@ -42,12 +43,14 @@ namespace Strategy.Core
 
         private void ProduceUnit(UnitProductionTask unitProductionTask)
         {
-            //var position = new Vector3(Random.Range(-10.0f, 10.0f), 0.0f, Random.Range(-10.0f, 10.0f));
             var position = gameObject.transform.position;
             var newUnit = Object.Instantiate(unitProductionTask.UnitPrefab, position, Quaternion.identity, _unitParent);
+            var newUnitTeam = newUnit.GetComponentInChildren<Team>();
+            newUnitTeam.SetTeamID(gameObject.GetComponentInChildren<Team>().TeamID);
 
             CommandExecutorBase<IMoveCommand> executor = newUnit.GetComponentInChildren<CommandExecutorBase<IMoveCommand>>();
             executor.ExecuteCommand(new MoveCommand(_point.position));
+            _remainingUnits.AddUnit(newUnitTeam);
         }
 
         private void RemoveItemAtIndex(int index)

@@ -78,7 +78,7 @@ namespace Strategy.UserControl.Presenter
                 else
                 {
                     IAttackable attackable = hit.transform.GetComponentInParent<IAttackable>();
-                    if(attackable != null)
+                    if(attackable != null && CanAttack(attackable))
                         _attackableValue.ChangeValue(attackable);
                 }
             }
@@ -102,6 +102,11 @@ namespace Strategy.UserControl.Presenter
             while(notDone);
 
             return count;
+        }
+
+        private bool CanAttack(IAttackable attackable)
+        {
+            return true;
         }
 
         private sealed class CompareDistances : IComparer<RaycastHit>
