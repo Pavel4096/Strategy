@@ -16,6 +16,8 @@ namespace Strategy.UserControl.Presenter
         [Inject] private Vector3Value _vector3Value;
         [Inject] private AttackableValue _attackableValue;
 
+        [Inject] private IItemSelectorWriter _itemSelector;
+
         private Camera _camera;
         private RaycastHit[] _hits;
         private int _groundLayer;
@@ -61,12 +63,16 @@ namespace Strategy.UserControl.Presenter
                     continue;
                 
                 _selectedObject.ChangeValue(currentSelectable);
+                _itemSelector.ChangeValue(currentSelectable);
                 selectionFound = true;
                 break;   
             }
 
             if(!selectionFound)
+            {
                 _selectedObject.ChangeValue(null);
+                _itemSelector.ChangeValue(null);
+            }
         }
 
         private void CheckRightMouseButton()

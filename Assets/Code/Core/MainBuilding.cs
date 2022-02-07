@@ -27,7 +27,7 @@ namespace Strategy.Core
             if(_health <= 0)
             {
                 Object.Destroy(gameObject);
-                _remainingUnits.RemoveUnit(GetComponent<ITeam>());
+                _remainingUnits.RemoveUnit(GetComponent<ITeam>(), gameObject.transform);
             }
         }
 

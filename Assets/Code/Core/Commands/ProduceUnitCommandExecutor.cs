@@ -6,15 +6,16 @@ using UnityEngine;
 
 namespace Strategy.Core
 {
-    public sealed class ProduceUnitCommandExecutor : CommandExecutorBase<IProduceUnitCommand>, IUnitProducer
+    public sealed class ProduceUnitCommandExecutor : CommandExecutorBase<IProduceUnitCommand>, IProduceUnitCommandExecutor, IUnitProducer
     {
         private const int _MAX_QUEUE_SIZE = 6;
         public IReadOnlyReactiveCollection<IUnitProductionTask> Queue => (IReadOnlyReactiveCollection<IUnitProductionTask>) _queue;
 
         [SerializeField] private Transform _unitParent;
-        [SerializeField] private Transform _point;
+        //[SerializeField] private Transform _point;
         [Inject] private RemainingUnits _remainingUnits;
         private ReactiveCollection<IUnitProductionTask> _queue = new ReactiveCollection<IUnitProductionTask>();
+        private Vector3 _point;
 
         public void Cancel(int index) => RemoveItemAtIndex(index);
 
@@ -41,6 +42,8 @@ namespace Strategy.Core
             _queue.Add(newUnitProductionTask);
         }
 
+        public void SetUnitParent(Transform unitParent) => _unitParent = unitParent;
+
         private void ProduceUnit(UnitProductionTask unitProductionTask)
         {
             var position = gameObject.transform.position;
@@ -49,7 +52,7 @@ namespace Strategy.Core
             newUnitTeam.SetTeamID(gameObject.GetComponentInChildren<Team>().TeamID);
 
             CommandExecutorBase<IMoveCommand> executor = newUnit.GetComponentInChildren<CommandExecutorBase<IMoveCommand>>();
-            executor.ExecuteCommand(new MoveCommand(_point.position));
+            executor.ExecuteCommand(new MoveCommand(_point));
             _remainingUnits.AddUnit(newUnitTeam);
         }
 
