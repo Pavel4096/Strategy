@@ -2752,6 +2752,7 @@ GameObject:
   - component: {fileID: 111342685272915277}
   - component: {fileID: 6926546609511947055}
   - component: {fileID: 8096187299452323431}
+  - component: {fileID: 3413301326156070089}
   m_Layer: 0
   m_Name: Unit0
   m_TagString: Untagged
@@ -2808,7 +2809,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 1000
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: 265168b36c42aba4b8dd3c8737af41e1, type: 3}
 --- !u!114 &2746880423920268719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2848,7 +2849,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 759839f5a0770cf419cbe1a87e83f306, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unitStopper: {fileID: 1207407987282124406}
 --- !u!114 &7983447819516641213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2964,6 +2964,21 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0.25, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &3413301326156070089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5505366496807801696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4d620f80c55ed4bbc57258b851add1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 2049
+  Prefab: Unit0
+  Team: 0
 --- !u!1 &5505366496807801698
 GameObject:
   m_ObjectHideFlags: 0
