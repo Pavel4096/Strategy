@@ -1,0 +1,11 @@
+{
+    "Name": "Building1",
+    "Prefab": "Building1",
+    "Id": 1026,
+    "StringId": "Building1",
+    "MaxHP": 1500,
+    "Attack": -1,
+    "Icon": "Building1",
+    "Commands": [ 5 ],
+    "Items": [ 2049, 2050 ]
+}

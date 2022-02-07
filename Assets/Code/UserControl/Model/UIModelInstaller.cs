@@ -17,6 +17,9 @@ namespace Strategy.UserControl.Model
             Container.Bind<string>().WithId("Chomper").FromInstance("Some name");
             Container.Bind<float>().WithId("Chomper").FromInstance(2.5f);
             Container.Bind<UICenterModel>().AsSingle();
+
+            //Container.Bind<ItemSelector>().AsSingle();
+            Container.Bind(typeof(IItemSelectorWriter), typeof(IItemSelector)).To<ItemSelector>().AsSingle();
         }
     }
 }
