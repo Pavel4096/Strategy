@@ -59,6 +59,7 @@ namespace Strategy.Core
             {
                 List<Transform> buildings = _remainingBuildings[teamID];
 
+
                 for(var i = 0; i < buildings.Count; i++)
                 {
                     float currentSqrDistance = (position - buildings[i].position).sqrMagnitude;

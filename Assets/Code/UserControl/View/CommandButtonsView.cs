@@ -15,6 +15,7 @@ namespace Strategy.UserControl.View
         [SerializeField] private GameObject _stopButton;
         [SerializeField] private GameObject _patrolButton;
         [SerializeField] private GameObject _moveButton;
+        [SerializeField] private GameObject _bringMatterButton;
 
         private Dictionary<Type, GameObject> _buttonsByExecutorType;
 
@@ -28,6 +29,7 @@ namespace Strategy.UserControl.View
             _buttonsByExecutorType.Add(typeof(CommandExecutorBase<IStopCommand>), _stopButton);
             _buttonsByExecutorType.Add(typeof(CommandExecutorBase<IPatrolCommand>), _patrolButton);
             _buttonsByExecutorType.Add(typeof(CommandExecutorBase<IMoveCommand>), _moveButton);
+            _buttonsByExecutorType.Add(typeof(CommandExecutorBase<IBringMatterCommand>), _bringMatterButton);
         }
 
         public void MakeLayout(IEnumerable<ICommandExecutor> commandExecutors)
@@ -70,6 +72,7 @@ namespace Strategy.UserControl.View
             _stopButton.GetComponent<Selectable>().interactable = true;
             _patrolButton.GetComponent<Selectable>().interactable = true;
             _moveButton.GetComponent<Selectable>().interactable = true;
+            _bringMatterButton.GetComponent<Selectable>().interactable = true;
         }
 
         public void EnableDefaultCommand()

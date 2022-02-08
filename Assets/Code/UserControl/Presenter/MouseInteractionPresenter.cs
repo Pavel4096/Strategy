@@ -15,6 +15,7 @@ namespace Strategy.UserControl.Presenter
         [Inject] private SelectableValue _selectedObject;
         [Inject] private Vector3Value _vector3Value;
         [Inject] private AttackableValue _attackableValue;
+        [Inject] private MatterStorageValue _matterStorageValue;
 
         [Inject] private IItemSelectorWriter _itemSelector;
 
@@ -77,6 +78,7 @@ namespace Strategy.UserControl.Presenter
 
         private void CheckRightMouseButton()
         {
+            bool done = false;
             if(Physics.Raycast(_camera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
             {
                 if(hit.transform.gameObject.layer == _groundLayer)
@@ -85,7 +87,20 @@ namespace Strategy.UserControl.Presenter
                 {
                     IAttackable attackable = hit.transform.GetComponentInParent<IAttackable>();
                     if(attackable != null && CanAttack(attackable))
+                    {
                         _attackableValue.ChangeValue(attackable);
+                        done = true;
+                    }
+                }
+
+                if(!done)
+                {
+                    IMatterStorage matterStorage = hit.transform.GetComponentInParent<IMatterStorage>();
+                    if(matterStorage != null)
+                    {
+                        _matterStorageValue.ChangeValue(matterStorage);
+                        done = true;
+                    }
                 }
             }
         }

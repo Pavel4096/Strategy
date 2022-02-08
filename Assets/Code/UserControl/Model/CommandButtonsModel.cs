@@ -21,6 +21,7 @@ namespace Strategy.UserControl.Model
         [Inject] private CommandCreatorBase<IAttackCommand> _attackCommand;
         [Inject] private CommandCreatorBase<IPatrolCommand> _patrolCommand;
         [Inject] private CommandCreatorBase<IMoveCommand> _moveCommand;
+        [Inject] private CommandCreatorBase<IBringMatterCommand> _bringMatterCommand;
 
         private bool _isCommandPending;
 
@@ -37,6 +38,7 @@ namespace Strategy.UserControl.Model
             _attackCommand.ProcessCommandCreation(executor, (command) => ProcessCommandExecution(executor, command));
             _patrolCommand.ProcessCommandCreation(executor, (command) => ProcessCommandExecution(executor, command));
             _moveCommand.ProcessCommandCreation(executor, (command) => ProcessCommandExecution(executor, command));
+            _bringMatterCommand.ProcessCommandCreation(executor, (command) => ProcessCommandExecution(executor, command));
         }
 
         public void SelectionChanged()

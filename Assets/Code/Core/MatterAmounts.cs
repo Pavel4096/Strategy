@@ -6,14 +6,31 @@ namespace Strategy.Core
     {
         private Dictionary<int, float> _matterAmounts = new Dictionary<int, float>();
 
+        private const float _initialAmount = 200.0f;
+
         public void AddMatter(int teamID, float matterAmount)
         {
             if(_matterAmounts.ContainsKey(teamID))
                 _matterAmounts[teamID] += matterAmount;
             else
                 _matterAmounts.Add(teamID, matterAmount);
-            
-            UnityEngine.Debug.Log(_matterAmounts[teamID]);
+        }
+
+        public bool RemoveMatter(int teamID, float matterAmount)
+        {
+            if(!_matterAmounts.ContainsKey(teamID))
+                _matterAmounts.Add(teamID, _initialAmount);
+
+            float currentAmount = _matterAmounts[teamID];
+            currentAmount -= matterAmount;
+
+            if(currentAmount >= 0)
+            {
+                _matterAmounts[teamID] = currentAmount;
+                return true;
+            }
+
+            return false;
         }
     }
 }

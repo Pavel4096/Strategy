@@ -35,5 +35,10 @@ namespace Strategy.Core
         {
             _health = _maxHealth;
         }
+
+        private void Start()
+        {
+            _remainingUnits.AddUnit(GetComponent<ITeam>(), gameObject.transform);
+        }
     }
 }

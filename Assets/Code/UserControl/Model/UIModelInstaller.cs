@@ -13,6 +13,7 @@ namespace Strategy.UserControl.Model
             Container.Bind<CommandCreatorBase<IAttackCommand>>().To<AttackCommandCreator>().AsTransient();
             Container.Bind<CommandCreatorBase<IPatrolCommand>>().To<PatrolCommandCreator>().AsTransient();
             Container.Bind<CommandCreatorBase<IMoveCommand>>().To<MoveCommandCreator>().AsTransient();
+            Container.Bind<CommandCreatorBase<IBringMatterCommand>>().To<BringMatterCommandCreator>().AsTransient();
             Container.Bind<CommandButtonsModel>().AsSingle();
             Container.Bind<string>().WithId("Chomper").FromInstance("Some name");
             Container.Bind<float>().WithId("Chomper").FromInstance(2.5f);

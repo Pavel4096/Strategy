@@ -14,8 +14,12 @@ namespace Strategy.Core
         [SerializeField] private Transform _unitParent;
         //[SerializeField] private Transform _point;
         [Inject] private RemainingUnits _remainingUnits;
+        [Inject] private MatterAmounts _matterAmounts;
+        [Inject] private DiContainer _diContainer;
         private ReactiveCollection<IUnitProductionTask> _queue = new ReactiveCollection<IUnitProductionTask>();
         private Vector3 _point;
+        private int _teamId;
+        private const float _matterPerUnit = 150;
 
         public void Cancel(int index) => RemoveItemAtIndex(index);
 
@@ -24,9 +28,12 @@ namespace Strategy.Core
             if(_queue.Count == 0)
                 return;
             
+             if(_teamId == 0)
+                _teamId = gameObject.GetComponentInChildren<Team>().TeamID;
+            
             var firstItem = (UnitProductionTask) _queue[0];
             firstItem.TimeLeft -= Time.deltaTime;
-            if(firstItem.TimeLeft <= 0)
+            if(firstItem.TimeLeft <= 0 && _matterAmounts.RemoveMatter(_teamId, _matterPerUnit))
             {
                 ProduceUnit(firstItem);
                 RemoveItemAtIndex(0);
@@ -49,7 +56,9 @@ namespace Strategy.Core
             var position = gameObject.transform.position;
             var newUnit = Object.Instantiate(unitProductionTask.UnitPrefab, position, Quaternion.identity, _unitParent);
             var newUnitTeam = newUnit.GetComponentInChildren<Team>();
-            newUnitTeam.SetTeamID(gameObject.GetComponentInChildren<Team>().TeamID);
+
+            newUnitTeam.SetTeamID(_teamId);
+            _diContainer.InjectGameObject(newUnit);
 
             CommandExecutorBase<IMoveCommand> executor = newUnit.GetComponentInChildren<CommandExecutorBase<IMoveCommand>>();
             executor.ExecuteCommand(new MoveCommand(_point));

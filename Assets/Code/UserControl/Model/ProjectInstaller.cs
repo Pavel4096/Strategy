@@ -13,6 +13,7 @@ namespace Strategy.UserControl.Model
         [SerializeField] private SelectableValue _selectableValue;
         [SerializeField] private Vector3Value _vector3Value;
         [SerializeField] private AttackableValue _attackableValue;
+        [SerializeField] private MatterStorageValue _matterStorageValue;
         [SerializeField] private Sprite _icon;
 
         public override void InstallBindings()
@@ -21,10 +22,12 @@ namespace Strategy.UserControl.Model
             Container.Bind<SelectableValue>().FromInstance(_selectableValue);
             Container.Bind<Vector3Value>().FromInstance(_vector3Value);
             Container.Bind<AttackableValue>().FromInstance(_attackableValue);
+            Container.Bind<MatterStorageValue>().FromInstance(_matterStorageValue);
 
             Container.Bind<IAwaitable<ISelectable>>().FromInstance(_selectableValue);
             Container.Bind<IAwaitable<Vector3>>().FromInstance(_vector3Value);
             Container.Bind<IAwaitable<IAttackable>>().FromInstance(_attackableValue);
+            Container.Bind<IAwaitable<IMatterStorage>>().FromInstance(_matterStorageValue);
 
             Container.Bind<Sprite>().WithId("Chomper").FromInstance(_icon);
         }

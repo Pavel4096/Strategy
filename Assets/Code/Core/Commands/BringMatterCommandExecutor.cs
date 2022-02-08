@@ -38,7 +38,6 @@ namespace Strategy.Core.Commands
             _unitStopper = gameObject.GetComponent<UnitStopper>();
             _animator = gameObject.GetComponent<Animator>();
             _meshAgent = gameObject.GetComponent<NavMeshAgent>();
-            _teamId = gameObject.GetComponent<ITeam>().TeamID;
         }
 
         private void Update()
@@ -70,9 +69,12 @@ namespace Strategy.Core.Commands
         public override async void ExecuteSpecificCommand(IBringMatterCommand command)
         {
             _currentMatterStorageLocation = command.MatterStoragePosition;
+            if(_teamId == 0)
+                _teamId = gameObject.GetComponent<ITeam>().TeamID;
 
             try
             {
+                _isCommandActive = true;
                 while(true)
                 {
                     if(_currentMatterAmount >= _maxMatterAmount)
@@ -104,12 +106,13 @@ namespace Strategy.Core.Commands
                     while(_isCollectingMatter)
                     {
                         ct.ThrowIfCancellationRequested();
-                        Task.Yield();
+                        await Task.Delay(100);
                     }
                 }
             }
             catch {}
 
+            _isCommandActive = false;
             Completed?.Invoke();
         }
     }
