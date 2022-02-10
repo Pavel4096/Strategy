@@ -5,7 +5,8 @@
     "StringId": "Building1",
     "MaxHP": 1500,
     "Attack": -1,
-    "Icon": "Building1",
+    "ProductionTime": 25.0,
+    "Icon": "Icons/Building1",
     "Commands": [ 5 ],
     "Items": [ 2049, 2050 ]
 }

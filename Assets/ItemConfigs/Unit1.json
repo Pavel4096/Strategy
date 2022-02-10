@@ -5,7 +5,8 @@
     "StringId": "Unit1",
     "MaxHP": 500,
     "Attack": 50,
-    "Icon": "Unit1",
+    "ProductionTime": 2.5,
+    "Icon": "Icons/Unit1",
     "Commands": [ 1, 2, 3, 4 ],
     "Items": [ 1025, 1026 ]
 }
