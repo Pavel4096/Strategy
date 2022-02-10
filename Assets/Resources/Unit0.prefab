@@ -2809,6 +2809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c11f3dc393d930c4e88d7616d251e996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _typeId: 2049
   _maxHealth: 1000
   _icon: {fileID: 21300000, guid: 265168b36c42aba4b8dd3c8737af41e1, type: 3}
 --- !u!114 &2746880423920268719
