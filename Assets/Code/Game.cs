@@ -36,7 +36,6 @@ namespace Strategy
         {
             GameObject uiPrefab = Resources.Load<GameObject>("UI");
             GameObject ui = Object.Instantiate(uiPrefab);
-            _diContainer.InjectGameObject(ui);
         }
     }
 }

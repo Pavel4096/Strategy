@@ -3,7 +3,8 @@
     "rootNamespace": "",
     "references": [
         "Utils",
-        "UniRx"
+        "UniRx",
+        "CommonTypes"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

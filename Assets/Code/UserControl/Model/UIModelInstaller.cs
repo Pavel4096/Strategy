@@ -21,6 +21,9 @@ namespace Strategy.UserControl.Model
 
             //Container.Bind<ItemSelector>().AsSingle();
             Container.Bind(typeof(IItemSelectorWriter), typeof(IItemSelector)).To<ItemSelector>().AsSingle();
+
+
+            Container.Bind<MouseInputModel>().AsSingle();
         }
     }
 }

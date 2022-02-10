@@ -1,6 +1,9 @@
+using Strategy.Abstractions;
+using Strategy.CommonTypes;
 using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Strategy.Common
 {
@@ -15,6 +18,41 @@ namespace Strategy.Common
                 return;
             
             ProcessDirectory(configPath);
+        }
+
+        public ISelectionCapabilities GetCapabilities(ItemTypes typeId)
+        {
+            SelectionCapabilities capabilities = new SelectionCapabilities();
+
+            if(_itemConfigs.ContainsKey(typeId))
+            {
+                ItemData itemData = _itemConfigs[typeId];
+                capabilities.SetCapabilities(itemData);
+            }
+
+            return capabilities;
+        }
+
+        public Sprite GetItemImage(ItemTypes itemId)
+        {
+            ItemData item = _itemConfigs[itemId];
+            Sprite image = Resources.Load<Sprite>(item.Icon);
+
+            return image;
+        }
+
+        public string GetPrefab(ItemTypes itemId)
+        {
+            ItemData item = _itemConfigs[itemId];
+
+            return item.Prefab;
+        }
+
+        public float GetProductionTime(ItemTypes itemId)
+        {
+            ItemData item = _itemConfigs[itemId];
+
+            return item.ProductionTime;
         }
 
         private void ProcessDirectory(string path)

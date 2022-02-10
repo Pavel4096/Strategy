@@ -2,12 +2,16 @@ using Strategy.Abstractions;
 using Strategy.Abstractions.Commands;
 using UniRx;
 using Zenject;
+using System;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Strategy.Core
 {
     public sealed class ProduceUnitCommandExecutor : CommandExecutorBase<IProduceUnitCommand>, IProduceUnitCommandExecutor, IUnitProducer
     {
+        public override event Action Completed;
+
         private const int _MAX_QUEUE_SIZE = 6;
         public IReadOnlyReactiveCollection<IUnitProductionTask> Queue => (IReadOnlyReactiveCollection<IUnitProductionTask>) _queue;
 
@@ -42,11 +46,12 @@ namespace Strategy.Core
         
         public override void ExecuteSpecificCommand(IProduceUnitCommand command)
         {
-            if(_queue.Count == _MAX_QUEUE_SIZE)
-                return;
-
-            var newUnitProductionTask = new UnitProductionTask(command.Name, command.ProductionTime, command.UnitPrefab, command.Icon);
-            _queue.Add(newUnitProductionTask);
+            if(_queue.Count < _MAX_QUEUE_SIZE)
+            {
+                var newUnitProductionTask = new UnitProductionTask(command.Name, command.ProductionTime, command.UnitPrefab, command.Icon);
+                _queue.Add(newUnitProductionTask);
+            }
+            Completed?.Invoke();
         }
 
         public void SetUnitParent(Transform unitParent) => _unitParent = unitParent;

@@ -16,5 +16,15 @@ namespace Strategy.UserControl.Commands
         [Inject(Id = "Chomper")] private Sprite _icon;
         [Inject(Id = "Chomper")] private string _name;
         [Inject(Id = "Chomper")] private float _productionTime;
+
+        public ProduceUnitCommand()
+        {}
+
+        public ProduceUnitCommand(GameObject prefab, Sprite icon, float productionTime)
+        {
+            _unitPrefab = prefab;
+            _icon = icon;
+            _productionTime = productionTime;
+        }
     }
 }

@@ -27,9 +27,13 @@ namespace Strategy.Common
 
             if(isBuilding)
             {
-                newItem.GetComponent<IProduceUnitCommandExecutor>().SetUnitParent(_unitsParent);
+                IProduceUnitCommandExecutor produceUnitCommandExecutor = newItem.GetComponent<IProduceUnitCommandExecutor>();
+                if(produceUnitCommandExecutor != null)
+                    produceUnitCommandExecutor.SetUnitParent(_unitsParent);
             }
-            newItem.GetComponent<ITeam>().SetTeamID(item.Team);
+            ITeam team = newItem.GetComponent<ITeam>();
+            if(team != null)
+                team.SetTeamID(item.Team);
 
             return true;
         }

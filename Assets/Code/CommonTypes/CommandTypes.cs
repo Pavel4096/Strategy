@@ -1,4 +1,4 @@
-namespace Strategy.Common
+namespace Strategy.CommonTypes
 {
     public enum CommandTypes
     {
@@ -7,6 +7,7 @@ namespace Strategy.Common
         Stop        = 2,
         Patrol      = 3,
         Attack      = 4,
-        ProduceUnit = 5
+        ProduceUnit = 5,
+        BringMatter = 6
     }
 }

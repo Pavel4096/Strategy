@@ -77,8 +77,8 @@ namespace Strategy.UserControl.View
 
         public void EnableDefaultCommand()
         {
-            if(_defaultCommandExecutor != null)
-                CommandSelected?.Invoke(_defaultCommandExecutor);
+            //if(_defaultCommandExecutor != null)
+            //    CommandSelected?.Invoke(_defaultCommandExecutor);
         }
 
         public void Clear()

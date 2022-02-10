@@ -1,3 +1,4 @@
+using Strategy.CommonTypes;
 using System;
 
 namespace Strategy.Common

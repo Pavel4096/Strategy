@@ -1,3 +1,4 @@
+using Strategy.CommonTypes;
 using UnityEngine;
 
 namespace Strategy.Common

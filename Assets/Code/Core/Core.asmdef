@@ -5,7 +5,8 @@
         "Abstractions",
         "Utils",
         "UniRx",
-        "Zenject"
+        "Zenject",
+        "CommonTypes"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

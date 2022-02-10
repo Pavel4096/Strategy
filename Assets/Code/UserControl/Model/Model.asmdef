@@ -7,7 +7,9 @@
         "UserControl",
         "Zenject",
         "Commands",
-        "UniRx"
+        "UniRx",
+        "CommonTypes",
+        "Common"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

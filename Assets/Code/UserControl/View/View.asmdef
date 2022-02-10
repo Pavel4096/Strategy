@@ -5,7 +5,8 @@
         "Abstractions",
         "UniRx",
         "Unity.TextMeshPro",
-        "Zenject"
+        "Zenject",
+        "CommonTypes"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

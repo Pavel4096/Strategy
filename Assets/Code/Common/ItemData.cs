@@ -1,4 +1,6 @@
+using Strategy.CommonTypes;
 using System;
+using System.Collections.Generic;
 
 namespace Strategy.Common
 {
@@ -11,8 +13,9 @@ namespace Strategy.Common
         public string StringId;
         public float MaxHP;
         public float Attack;
+        public float ProductionTime;
         public string Icon;
-        public CommandTypes[] Commands;
-        public ItemTypes[] Items;
+        public List<CommandTypes> Commands;
+        public List<ItemTypes> Items;
     }
 }
